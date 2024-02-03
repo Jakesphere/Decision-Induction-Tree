@@ -376,7 +376,7 @@ void predict_class(vector<string>& tuple, tree_node*& root) {
 
 int main() {
 	vector <vector<string>> tuples;
-	ifstream file("C:/Users/Jake/Documents/DecisionTree/Project1/data.txt");
+	ifstream file("C:/Users/Jake/Documents/DecisionTree/Project1/data.txt");// IMPORTANT please replace this with your dataset
 	//ifstream file("C:/Users/Jake/Documents/FPgrowth/adult/adult.data");
 
 	if (file.fail()) {
@@ -411,7 +411,7 @@ int main() {
 		tuples.push_back(tuple);
 	}
 
-	string pos = "end";
+	string pos = "end";// IMPORTANT this represents the column of the class
 	if (pos == "start") {
 		for (int i = 0; i < tuples.size(); i++) {
 			tuples.at(i).push_back(tuples.at(i).at(0));
@@ -458,7 +458,8 @@ int main() {
 			}
 		}
 
-	int split =0;
+	int split =0;// IMPORTANT leave the value as 0 if you want to test the accuracy of the tree generated on the same
+	//dataset that was used to generate the tree, otherwise change appropriately
 	vector<vector<string>> test_tuples;
 	if (split != 0) {
 		for (int i = 0; i < split; i++) {
