@@ -222,71 +222,6 @@ int Attribute_selection_method(vector<vector<list>>& tuples) {
 	return find_max(gains);
 }
 
-
-
-int Attribute_selection_method_gainratio(vector<vector<list>>& tuples) {
-
-	int total_rows = 0;
-	for (int i = 0; i < tuples.at(0).size(); i++) {
-		for (node* cursor = tuples.at(0).at(i).begin(); cursor != tuples.at(0).at(i).end(); cursor = cursor->next) {
-			total_rows += cursor->count;
-		}
-	}
-
-	int total_type;
-	double info_d;
-	double info_d_type;
-	double splitting_info;
-	vector<double> gains;
-	vector<node*> classes;
-	int flag;
-
-	for (int i = 0; i < tuples.at(0).size(); i++) {
-		for (node* cursor = tuples.at(0).at(i).begin(); cursor != tuples.at(0).at(i).end(); cursor=cursor->next) {
-			flag = 0;
-			for (int j = 0; j < classes.size(); j++) {
-				if (cursor->class_ == classes.at(j)->class_) {
-					flag = 1;
-					classes.at(j)->count+=cursor->count;
-					break;
-				}
-			}
-			if (flag == 0) {
-				node* copy = new node;
-				copy->class_ = cursor->class_;
-				copy->count = cursor->count;
-				classes.push_back(copy);
-			}
-		}
-	}
-
-	double class_info_d=0;
-	for (int j = 0; j < classes.size(); j++) {
-		class_info_d += double(classes.at(j)->count) / double(total_rows) * log2(double(classes.at(j)->count) / double(total_rows));
-	}
-	class_info_d *= -1;
-
-	for (int i = 0; i < tuples.size(); i++) {
-		info_d = 0;
-		splitting_info = 0;
-		for (int j = 0; j < tuples.at(i).size(); j++) {
-			total_type = 0;
-			info_d_type = 0;
-			for (node* cursor = tuples.at(i).at(j).begin(); cursor != tuples.at(i).at(j).end(); cursor = cursor->next) {
-				total_type += cursor->count;
-			}
-			for (node* cursor = tuples.at(i).at(j).begin(); cursor != tuples.at(i).at(j).end(); cursor = cursor->next) {
-				info_d_type += double(cursor->count) / double(total_type) * log2(double(cursor->count) / double(total_type));
-			}
-			info_d_type *= -1.0 * (double(total_type) / double(total_rows));
-			info_d += info_d_type;
-			splitting_info += double(total_type) / double(total_rows) * log2(double(total_type) / double(total_rows));
-		}
-		gains.push_back((class_info_d-info_d)/(-1*splitting_info));
-	}
-	return find_max(gains);
-}
-
 vector<vector<list>> sort_tuples(vector<vector<string>>& tuples) {
 
 	int class_col= tuples.at(0).size() - 1;
@@ -523,7 +458,7 @@ int main() {
 			}
 		}
 
-	int split =20;
+	int split =0;
 	vector<vector<string>> test_tuples;
 	if (split != 0) {
 		for (int i = 0; i < split; i++) {
