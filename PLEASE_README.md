@@ -1,6 +1,6 @@
 This project is a decision induction tree which is a classifier that can categorize large data sets. My classifier was able to work with 80% classification accuracy
 
-You can refer to my report if you need clarification "ESE 327 Project 2 report"
+You can refer to my report if you want more information: "ESE 327 Project 2 report"
 
 IMPORTANT: when using my code, you have to make sure that 
 line 414 is set to either start or end. This is the class column of your dataset. 
