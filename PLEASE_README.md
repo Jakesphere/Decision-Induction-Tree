@@ -1,4 +1,4 @@
-This project is a decision induction tree which is a classifier that can categorize large data sets. My classifier was able to work with 80% classification accuracy
+This project is  decision induction tree which is a classifier that can categorize large data sets. My classifier was able to work with 80% classification accuracy
 
 You can refer to my report if you need clarification "ESE 327 Project 2 report"
 
